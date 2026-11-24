@@ -34,6 +34,11 @@ function validateEntryLine(line: string): void {
       "Entry rejected: line must be a single line with no newline.",
     );
   }
+  if (/[\u0000-\u001F\u007F]/.test(line)) {
+    throw new Error(
+      "Entry rejected: line must not contain control characters (U+0000-U+001F, U+007F).",
+    );
+  }
   if (!line.endsWith(".")) {
     throw new Error("Entry rejected: line must end with a full stop.");
   }
